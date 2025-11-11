@@ -1,0 +1,17 @@
+Dolmalik_biber_Bakteriyel_leke
+Dolmalik_biber_healthy
+Domates _Septoria_leaf
+Domates_Kirmizi_orumcek
+Domates_Yaprak_kufu
+Patates_Alternaria_solani
+Patates_healthy
+domates_Alternaria_solani
+domates_Bacterial_spot
+domates_Phytophthora_infestans
+domates_Yellow_Leaf__Curl_Virus
+domates_healthy
+domates_mosaic_virus
+patates_Phytophthora_infestans
+
+
+
