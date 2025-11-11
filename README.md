@@ -1,70 +1,131 @@
-# Leaf Analysis Application
+# Plant Leaf Disease Detection – Flutter & TensorFlow Lite
 
-This project is a software application designed to analyze plant health, detect diseases, and identify species using images of plant leaves. It aims to assist farmers, gardeners, and botany enthusiasts by utilizing image processing and machine learning models.
+This project is a mobile application developed with Flutter for detecting plant leaf diseases using a TensorFlow Lite model. The application allows users to select an image from the camera or gallery, processes the image on-device, and provides disease predictions with confidence scores. It operates fully offline and supports multiple plant types.
 
-## About The Project
+## Features
 
-In agriculture and horticulture, the early detection of diseases and nutrient deficiencies is crucial. This application analyzes photos of leaves taken by users via a mobile device or webcam. Through trained artificial intelligence models, the system detects anomalies on the leaf (e.g., spots, discoloration, yellowing) and provides a preliminary report on potential diseases or nutritional deficiencies.
-
-## Core Features
-
-* **Disease Detection:** Identifies common plant diseases based on symptoms visible in leaf images.
-* **Nutrient Deficiency Analysis:** Determines potential nutrient deficiencies based on leaf color and patterns (e.g., chlorosis, necrosis).
-* **Species Identification:** (Optional) Can identify the plant species to which the leaf belongs.
-* **Instant Analysis:** Provides fast, real-time feedback.
-* **User-Friendly Interface:** Easy photo uploading and clear results display.
+* Image selection from camera or gallery
+* Offline inference using a TensorFlow Lite model
+* Displays top-1 and top-5 predictions
+* Outputs confidence scores
+* Automatic parsing of plant and disease names
+* Supports tomato, potato, and bell pepper leaf disease classes
+* Clean and simple user interface
+* Low-confidence detection warning
 
 ## Technologies Used
 
-The main technologies used in the development of this project are:
+* Flutter
+* TensorFlow Lite (tflite_flutter)
+* Image Picker
+* Image Processing (image package)
+* Custom CNN model exported as TensorFlow Lite
 
-* **Backend:** Python (Flask / Django)
-* **Machine Learning / Deep Learning:** TensorFlow, Keras, PyTorch
-* **Image Processing:** OpenCV
-* **Frontend (Web):** React / Vue.js / HTML5 & CSS3
-* **Frontend (Mobile):** Flutter / React Native / Swift (iOS) / Kotlin (Android)
-* **Database:** PostgreSQL / MySQL / SQLite
-* **Model Training:** Utilized datasets from PlantVillage, Kaggle, or custom-collected data.
+## Project Structure
+
+```
+lib/
+│── main.dart
+│── plant_disease_classifier.dart
+
+assets/
+└── models/
+     ├── plant_disease_model.tflite
+     └── labels.txt
+```
 
 ## Installation
 
-To get a local copy up and running, follow these steps.
+### 1. Install dependencies
 
-### Prerequisites
+```
+flutter pub get
+```
 
-* Python 3.8+
-* pip (Python package installer)
-* Git
+### 2. Add model files
 
-### Steps
+Place the model and label files under `assets/models/`:
 
-1.  Clone the repo:
-    ```bash
-    git clone [https://github.com/SabitKarinca/leaf-analysis-project.git](https://github.com/SabitKarinca/leaf-analysis-project.git)
-    ```
+```
+plant_disease_model.tflite
+labels.txt
+```
 
-2.  Navigate to the project directory:
-    ```bash
-    cd leaf-analysis-application
-    ```
+### 3. Add assets to pubspec.yaml
 
-3.  Install the required Python libraries:
-    ```bash
-    pip install -r requirements.txt
-    ```
+```yaml
+assets:
+  - assets/models/plant_disease_model.tflite
+  - assets/models/labels.txt
+```
 
-4.  (If applicable) Set up the database configuration:
-    * Copy `.env.example` to `.env`.
-    * Update the `.env` file with your database credentials.
+### 4. Run the application
 
-5.  Run database migrations:
-    ```bash
-    python manage.py migrate
-    ```
+```
+flutter run
+```
 
-## Usage
+## Model Workflow
 
-To start the application (Flask/Django example):
+The `PlantDiseaseClassifier` class performs the following operations:
 
-```bash
-python app.py
+* Loads the TensorFlow Lite model
+* Loads and parses the label file
+* Resizes the input image to 256x256
+* Converts the image into a tensor format
+* Runs inference using TensorFlow Lite
+* Applies softmax to obtain probabilities
+* Extracts the top-1 prediction
+* Extracts the top-5 predictions
+* Maps class indices to plant and disease names
+
+**Model input shape:** `1 x 256 x 256 x 3`
+
+**Model output:** Floating-point logits representing class probabilities.
+
+## Supported Plant Types
+
+The model supports the following plant species (based on label file):
+
+* Tomato
+* Potato
+* Bell Pepper
+
+## Packages Used
+
+```yaml
+tflite_flutter: ^0.10.4
+image_picker: ^1.1.0
+image: ^4.1.3
+```
+
+## Dataset
+
+This project uses the public dataset available on Kaggle:
+
+PlantVillage Dataset: [https://www.kaggle.com/datasets/emmarex/plantdisease](https://www.kaggle.com/datasets/emmarex/plantdisease)
+
+The dataset contains labeled leaf images for various plant species and their corresponding diseases.
+
+## Screenshots
+
+Below is a placeholder section for application screenshots. Replace the image paths with your own.
+
+| Home Screen                                  | Result Screen                                  |
+| -------------------------------------------- | ---------------------------------------------- |
+| <img src="screenshots/home.png" width="300"> | <img src="screenshots/result.png" width="300"> |
+
+## Notes
+
+* The application works completely offline.
+* Label list length must match model output size.
+* The implementation includes a fallback to avoid mismatches.
+* The model expects RGB images with pixel values from 0 to 255.
+
+## Contribution
+
+Contributions and suggestions are welcome. Please submit a pull request or open an issue for improvements.
+
+## License
+
+This project is released under the MIT License.
