@@ -99,6 +99,24 @@ image_picker: ^1.1.0
 image: ^4.1.3
 ```
 
+## Model Versions
+
+### Final Model (Used in Application)
+
+* **File:** `plant_disease_model.tflite`
+* **Labels:** `labels.txt`
+* This is the active and working TensorFlow Lite model used by the Flutter application.
+
+### Previous/Experimental Models
+
+Old or non-functional model attempts can be found under:
+
+```
+model_training/old_models/
+```
+
+These include earlier attempts that resulted in TFLite conversion errors, version mismatches, or unsupported operators. They are retained only for documentation and research history and are **not** used in the application.
+
 ## Dataset
 
 This project uses the public dataset available on Kaggle:
