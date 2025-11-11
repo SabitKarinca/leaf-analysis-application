@@ -131,7 +131,7 @@ Below is a placeholder section for application screenshots. Replace the image pa
 
 | Home Screen                                  | Result Screen                                  |
 | -------------------------------------------- | ---------------------------------------------- |
-| <img src="assets/screenshots/Home Screen.png" width="300"> | <img src="screenshots/result.png" width="300"> |
+| <img src="assets/screenshots/Home Screen.png" width="300"> | <img src="assets/screenshots/result screen.png" width="300"> |
 
 ## Notes
 
