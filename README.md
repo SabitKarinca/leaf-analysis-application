@@ -19,7 +19,7 @@ This project is a mobile application developed with Flutter for detecting plant 
 * TensorFlow Lite (tflite_flutter)
 * Image Picker
 * Image Processing (image package)
-* Custom CNN model exported as TensorFlow Lite
+* EfficientNetB0 Model exported as TensorFlow Lite
 
 ## Project Structure
 
